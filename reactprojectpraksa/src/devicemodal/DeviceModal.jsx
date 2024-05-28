@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     CButton,
     CCol,
@@ -15,7 +15,7 @@ import {
     CModalTitle,
     CRow
 } from '@coreui/react';
-import {ToastContainer, toast} from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 // Define image URLs for each device type
@@ -29,7 +29,7 @@ const deviceImages = {
     'Residual electrical loads': 'https://cdn-icons-png.flaticon.com/128/11652/11652120.png'
 };
 
-const DeviceModal = ({addDevice}) => {
+const DeviceModal = ({ addDevice }) => {
     const [visible, setVisible] = useState(false);
     const [validated, setValidated] = useState(false);
     const [selectedType, setSelectedType] = useState('');
@@ -57,21 +57,28 @@ const DeviceModal = ({addDevice}) => {
     const [co2EmissionRate, setCo2EmissionRate] = useState('');
     const [buildingMaxPower, setBuildingMaxPower] = useState('');
     const [residualMaxPower, setResidualMaxPower] = useState('');
+    const [isNameValid, setIsNameValid] = useState(true);
 
-
-    // useEffect to fetch devices on component mount
+    const handleNameChange = (e) => {
+        const value = e.target.value;
+        setDeviceName(value);
+        if (value.length < 3) {
+            setIsNameValid(false);
+        } else {
+            setIsNameValid(true);
+        }
+    };
 
     const handleSubmit = async (event) => {
         generateRandomNumber();
         const form = event.currentTarget;
 
-        if (form.checkValidity() === false) {
+        if (form.checkValidity() === false || !isNameValid) {
             event.preventDefault();
             event.stopPropagation();
         } else {
             event.preventDefault();
 
-            // Map the selectedType to the corresponding enum value
             const deviceTypeEnumMap = {
                 'Photovoltaic panel': 'PHOTOVOLTAIC_PANEL',
                 'Battery': 'BATTERY',
@@ -84,8 +91,8 @@ const DeviceModal = ({addDevice}) => {
 
             const deviceData = {
                 name: deviceName,
-                type: deviceTypeEnumMap[selectedType], // Ensure this is correctly set to the enum value
-                derId: derId, // Include the generated derId
+                type: deviceTypeEnumMap[selectedType],
+                derId: derId,
                 category: deviceCategory,
                 outputPower,
                 voltage,
@@ -122,10 +129,9 @@ const DeviceModal = ({addDevice}) => {
 
                 const result = await response.json();
                 console.log('Success:', result);
-                // Show success toast
                 toast.success('Form submitted successfully!', {
                     position: "top-right",
-                    autoClose: 3000, // Close the toast after 3 seconds
+                    autoClose: 3000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
@@ -177,42 +183,42 @@ const DeviceModal = ({addDevice}) => {
         setValidated(true);
     };
 
-
     const handleTypeChange = (event) => {
         const type = event.target.value;
         setSelectedType(type);
         setCategoryDisabled(false);
         setDeviceCategory(getDeviceCategory(type));
     };
+
     const generateRandomNumber = () => {
-        const randomNumber = Math.floor(Math.random() * 1000000); // Adjust the range as needed
-        setDerId(randomNumber.toString()); // Convert to string and set as DER ID
+        const randomNumber = Math.floor(Math.random() * 1000000);
+        setDerId(randomNumber.toString());
     };
 
-    // Call this function to generate the random number on component mount
-    useState(() => {
+    useEffect(() => {
         generateRandomNumber();
     }, []);
+
     const getDeviceCategory = (type) => {
-        generateRandomNumber()
         switch (type) {
             case 'Photovoltaic panel':
             case 'Wind turbine':
             case 'Electrical grid':
                 return 'PRODUCER';
-            case 'Battery':
             case 'Building':
+            case 'Electrical vehicle':
             case 'Residual electrical loads':
                 return 'CONSUMER';
-            default:
+            case 'Battery':
                 return 'MIXED';
+            default:
+                return '';
         }
     };
 
-    // Custom select option with image
-    const CustomSelectOption = ({value, label}) => (
+    const CustomSelectOption = ({ value, label }) => (
         <option value={value} className="d-flex align-items-center">
-            <img src={deviceImages[value]} height="30" alt={label} className="me-2"/>
+            <img src={deviceImages[value]} height="30" alt={label} className="me-2" />
             {label}
         </option>
     );
@@ -228,17 +234,15 @@ const DeviceModal = ({addDevice}) => {
                 visible={visible}
                 onClose={() => setVisible(false)}
                 aria-labelledby="VerticallyCenteredExample"
-
             >
                 <CModalHeader className="custom-modal-header">
                     <CModalTitle id="VerticallyCenteredExample">Add Device</CModalTitle>
                 </CModalHeader>
                 <CModalBody>
                     <CRow className="mb-3">
-                        <CCol sm="12" style={{marginLeft: '43%'}}>
+                        <CCol sm="12" style={{ marginLeft: '43%' }}>
                             <CCol>
-                                <img src={deviceImages[selectedType]} alt={selectedType}
-                                     style={{width: '10%', height: 'auto'}}/>
+                                <img src={deviceImages[selectedType]} alt={selectedType} style={{ width: '10%', height: 'auto' }} />
                             </CCol>
                         </CCol>
                     </CRow>
@@ -257,9 +261,14 @@ const DeviceModal = ({addDevice}) => {
                                 placeholder="Enter device name"
                                 required
                                 value={deviceName}
-                                onChange={(e) => setDeviceName(e.target.value)}
+                                onChange={handleNameChange}
+                                invalid={!isNameValid}
                             />
-                            <CFormFeedback invalid>Please provide a device name.</CFormFeedback>
+                            {!isNameValid && (
+                                <CFormFeedback invalid>
+                                    The device name must be at least 3 characters long.
+                                </CFormFeedback>
+                            )}
                         </CCol>
                         <CCol md={6}>
                             <CFormLabel htmlFor="deviceType">Type</CFormLabel>

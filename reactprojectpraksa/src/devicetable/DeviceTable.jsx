@@ -137,7 +137,11 @@ const DeviceTable = () => {
 
     const filteredItems = devices.filter(item =>
         item.name.toLowerCase().includes(filterText.toLowerCase()) ||
-        item.type.toLowerCase().includes(filterText.toLowerCase())
+        item.type.toLowerCase().includes(filterText.toLowerCase()) ||
+        item.derId.toString().toLowerCase().includes(filterText.toLowerCase())
+
+
+
     );
 
     return (
@@ -167,7 +171,7 @@ const DeviceTable = () => {
                 columns={columns}
                 items={filteredItems}
                 columnSorter
-                itemsPerPage={6}
+                itemsPerPage={5}
                 pagination
                 paginationProps={{
                     className: 'd-flex justify-content-center',

@@ -10,7 +10,6 @@ import {
     CFormInput,
     CFormFeedback,
     CFormLabel,
-    CImg,
 } from '@coreui/react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -70,12 +69,20 @@ const EditModal = ({ isOpen, onClose, deviceId, fetchData }) => {
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-
-        // Update device state
         setDevice(prevDevice => ({
             ...prevDevice,
-            [name]: value // Keep as empty string if value is empty
+            [name]: value
         }));
+    };
+
+    const handleNameInput = (e) => {
+        const input = e.target;
+        const minLength = 3;
+        if (input.value.length < minLength) {
+            input.setCustomValidity(`Name must be at least ${minLength} characters long.`);
+        } else {
+            input.setCustomValidity('');
+        }
     };
 
     const handleSubmit = async (event) => {
@@ -89,7 +96,7 @@ const EditModal = ({ isOpen, onClose, deviceId, fetchData }) => {
         try {
             await axios.patch(`http://localhost:8084/api/devices/${deviceId}`, device);
             toast.success("Device updated successfully");
-            fetchData(); // Refresh the data in the table
+            fetchData();
             onClose();
         } catch (error) {
             console.error('Error updating device:', error);
@@ -98,7 +105,7 @@ const EditModal = ({ isOpen, onClose, deviceId, fetchData }) => {
     };
 
     const fields = [
-        { label: 'Name', name: 'name' },
+        { label: 'Name', name: 'name', minLength: 3 },
         { label: 'Type', name: 'type', readOnly: true },
         { label: 'DER ID', name: 'derId', readOnly: true },
         { label: 'Category', name: 'category', readOnly: true },
@@ -122,7 +129,6 @@ const EditModal = ({ isOpen, onClose, deviceId, fetchData }) => {
         { label: 'Residual Max Power', name: 'residualMaxPower', min: 0, max: 30 },
     ];
 
-    // Filter the fields that have a value and are not null
     const filteredFields = fields.filter(field => device[field.name] !== undefined && device[field.name] !== null);
 
     return (
@@ -162,6 +168,7 @@ const EditModal = ({ isOpen, onClose, deviceId, fetchData }) => {
                                     type={field.name === 'name' ? 'text' : 'number'}
                                     value={device[field.name]}
                                     onChange={handleInputChange}
+                                    onInput={field.name === 'name' ? handleNameInput : null}
                                     id={field.name}
                                     name={field.name}
                                     placeholder={`Enter ${field.label.toLowerCase()}`}
@@ -169,10 +176,15 @@ const EditModal = ({ isOpen, onClose, deviceId, fetchData }) => {
                                     required={!field.readOnly}
                                     min={field.min}
                                     max={field.max}
+                                    minLength={field.name === 'name' ? field.minLength : undefined}
                                 />
                             }
                             <CFormFeedback valid>Looks good!</CFormFeedback>
-                            <CFormFeedback invalid>Please provide a valid {field.label.toLowerCase()}{field.min ? ` between ${field.min} and ${field.max}` : ''}.</CFormFeedback>
+                            <CFormFeedback invalid>
+                                {field.name === 'name' && field.minLength ?
+                                    `Name must be at least ${field.minLength} characters long.`
+                                    : `Please provide a valid ${field.label.toLowerCase()}${field.min ? ` between ${field.min} and ${field.max}` : ''}.`}
+                            </CFormFeedback>
                         </CCol>
                     ))}
                     <CCol xs={12}>
