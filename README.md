@@ -15,5 +15,6 @@ During my internship, I developed a  Device Management System designed to stream
 ### PostgreSQL
 - **Database**: PostgreSQL was chosen for its reliability and powerful features, handling the storage, retrieval, and management of device data efficiently.
 
-![image](https://github.com/IgorPavlov00/CRUDApp/assets/103071674/54275525-6d39-4101-b674-e2c80c746f8b)
+![image](https://github.com/IgorPavlov00/CRUDApp/assets/103071674/e403897d-bc66-4dd3-a6f0-5ababedbe36a)
+
 ![image](https://github.com/IgorPavlov00/CRUDApp/assets/103071674/f5738cff-fbf3-4fd5-b33d-3ef3a8746daa)
