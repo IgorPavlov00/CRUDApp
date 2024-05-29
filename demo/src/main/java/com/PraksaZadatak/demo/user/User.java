@@ -1,6 +1,7 @@
 package com.PraksaZadatak.demo.user;
 
 import com.PraksaZadatak.demo.device.Device;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import lombok.*;
@@ -30,7 +31,8 @@ public class User {
 
     private boolean enabled;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("user") // Exclude user field from serialization
     private Set<Device> devices = new HashSet<>();
 
     // getters and setters

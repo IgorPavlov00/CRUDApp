@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import {
     CButton,
 } from '@coreui/react';
@@ -9,6 +9,7 @@ import EditModal from "../devicemodal/EditModal";
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {UserContext} from "../context/UserContext";
 
 const DeviceTable = () => {
     const [details, setDetails] = useState([]);
@@ -22,7 +23,7 @@ const DeviceTable = () => {
         marginRight: '10px',
         borderRadius: '10px',
     };
-
+    const { user } = useContext(UserContext);
     const columns = [
         {
             key: 'id',
@@ -61,7 +62,7 @@ const DeviceTable = () => {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('http://localhost:8084/api/devices'); // Adjust URL as per your backend
+            const response = await axios.get(`http://localhost:8084/api/system/?username=${user.username}`); // Fetch user's devices
             setDevices(response.data);
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -125,7 +126,7 @@ const DeviceTable = () => {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`http://localhost:8084/api/devices/${id}`); // Adjust URL as per your backend
+            await axios.delete(`http://localhost:8084/api/devices/${id}?username=${user.username}`);
             setDevices(devices.filter(device => device.id !== id));
             toast.dismiss();
             toast.success("Device deleted successfully");

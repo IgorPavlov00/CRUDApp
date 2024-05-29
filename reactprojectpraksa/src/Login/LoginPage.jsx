@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
-import './LoginPage.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../context/UserContext';
+import './LoginPage.css';
 
 const LoginRegister = () => {
     const [isSignUp, setIsSignUp] = useState(false);
@@ -11,6 +13,8 @@ const LoginRegister = () => {
         email: '',
         password: '',
     });
+    const { setUser } = useContext(UserContext);
+    const navigate = useNavigate();
 
     const handleSignUpClick = () => {
         setIsSignUp(true);
@@ -32,16 +36,13 @@ const LoginRegister = () => {
             return;
         }
         try {
-
-            toast.success("Check your email for verification");
             const response = await axios.post('http://localhost:8084/api/auth/register', {
                 username: formData.username,
                 email: formData.email,
                 password: formData.password,
-
             });
+            toast.success("Check your email for verification");
             console.log('User registered:', response.data);
-
         } catch (error) {
             toast.error("Username or email already exists");
             console.error('Error registering user:', error);
@@ -61,6 +62,8 @@ const LoginRegister = () => {
             });
             toast.success("User logged in successfully");
             console.log('User logged in:', response.data);
+            setUser(response.data);  // Store the user details in context and local storage
+            navigate('/profile');
         } catch (error) {
             toast.error("Invalid username or password");
             console.error('Error logging in user:', error);
@@ -79,7 +82,7 @@ const LoginRegister = () => {
                         placeholder="Name"
                         value={formData.username}
                         onChange={handleChange}
-                        id="username" // Ensure the ID matches the CSS selector
+                        id="username"
                     />
                     <input
                         type="email"
@@ -108,7 +111,6 @@ const LoginRegister = () => {
                         placeholder="Username"
                         value={formData.username}
                         onChange={handleChange}
-                        id="username" // Ensure the ID matches the CSS selector
                     />
                     <input
                         type="password"
@@ -134,6 +136,7 @@ const LoginRegister = () => {
                     </div>
                 </div>
             </div>
+            <ToastContainer />
         </div>
     );
 };

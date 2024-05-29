@@ -7,16 +7,12 @@ const EmailConfirmation = () => {
     const { token } = useParams();
     const [status, setStatus] = useState('');
 
-
     useEffect(() => {
         const confirmEmail = async () => {
             try {
                 // Ensure the token is sent as a plain string
                 const response = await axios.post(`http://localhost:8084/api/auth/confirm`, token);
                 setStatus('Account confirmed successfully!');
-                // Redirect to login page after successful confirmation
-
-                <a href={'/'}>Login</a>
             } catch (error) {
                 console.log(token);
                 setStatus('Error confirming account. Please try again.');
@@ -26,8 +22,7 @@ const EmailConfirmation = () => {
     }, [token]);
 
     return (
-        <div>
-
+        <div className="emailContainer">
             <div className="wrapperAlert">
                 <div className="contentAlert">
                     <div className="topHalf">
@@ -61,7 +56,6 @@ const EmailConfirmation = () => {
                 </div>
             </div>
         </div>
-
     );
 };
 

@@ -1,0 +1,26 @@
+.user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20px;
+
+}
+
+.user-icon {
+    width: 70px;
+    height: 70px;
+    margin-top: 40px;
+    margin-bottom: 10px; /* Space between the image and the email */
+}
+
+.user-email {
+    color: white;
+    font-size: 1rem;
+}
+
+.logout-button {
+    padding: 5px 10px;
+    font-size: 1rem;
+    width: 90px;
+    margin-right: 170px;
+}

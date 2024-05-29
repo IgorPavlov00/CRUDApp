@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import {
     CModal,
     CModalHeader,
@@ -13,7 +13,7 @@ import {
 } from '@coreui/react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-
+import {UserContext} from "../context/UserContext";
 const deviceImages = {
     'PHOTOVOLTAIC_PANEL': 'https://cdn-icons-png.flaticon.com/128/3392/3392674.png',
     'BATTERY': 'https://cdn-icons-png.flaticon.com/128/1835/1835726.png',
@@ -57,10 +57,11 @@ const EditModal = ({ isOpen, onClose, deviceId, fetchData }) => {
             fetchDeviceDetails(deviceId);
         }
     }, [deviceId]);
+    const { user } = useContext(UserContext);
 
     const fetchDeviceDetails = async (id) => {
         try {
-            const response = await axios.get(`http://localhost:8084/api/devices/${id}`);
+            const response = await axios.get(`http://localhost:8084/api/system/getcurrentdevice/${id}?username=${user.username}`);
             setDevice(response.data);
         } catch (error) {
             console.error('Error fetching device details:', error);
@@ -94,7 +95,7 @@ const EditModal = ({ isOpen, onClose, deviceId, fetchData }) => {
             return;
         }
         try {
-            await axios.patch(`http://localhost:8084/api/devices/${deviceId}`, device);
+            await axios.put(`http://localhost:8084/api/system/${deviceId}?username=${user.username}`, device);
             toast.success("Device updated successfully");
             fetchData();
             onClose();

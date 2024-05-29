@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useContext } from 'react';
 import {
     CButton,
     CCol,
@@ -17,6 +17,7 @@ import {
 } from '@coreui/react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {UserContext} from "../context/UserContext";
 
 // Define image URLs for each device type
 const deviceImages = {
@@ -68,6 +69,7 @@ const DeviceModal = ({ addDevice }) => {
             setIsNameValid(true);
         }
     };
+    const { user } = useContext(UserContext);
 
     const handleSubmit = async (event) => {
         generateRandomNumber();
@@ -115,7 +117,7 @@ const DeviceModal = ({ addDevice }) => {
             };
 
             try {
-                const response = await fetch('http://localhost:8084/api/devices', {
+                const response = await fetch(`http://localhost:8084/api/system/?username=${user.username}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

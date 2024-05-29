@@ -95,7 +95,7 @@ button {
     transition: transform 80ms ease-in;
 }
 
-#username {
+#username{
     width: 240px;
     text-align: center;
     background: transparent;

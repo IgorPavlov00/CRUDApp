@@ -14,19 +14,27 @@ import {
 import { ToastContainer } from 'react-toastify';
 import EmailConfirmation from "./Email/EmailConfirmation";
 import LoginRegister from "./Login/LoginPage";
+import UserProfile from "./UserProfile/Profile";
+import {UserProvider} from "./context/UserContext";
 function App() {
 
    return <div>
 
          <div>
-            <ToastContainer theme="colored"
+
             />
             {/* Navbar or other layout components can go here */}
+            <UserProvider>
+               <ToastContainer theme="colored"/>
             <Routes>
+
                <Route path="/confirm/:token" element={<EmailConfirmation />} />
                <Route path="/" element={<LoginRegister />} />
                <Route path="/der" element={<DeviceTable />} />
+               <Route path="/profile" element={<UserProfile />} />
             </Routes>
+
+            </UserProvider>
          </div>
 
 
