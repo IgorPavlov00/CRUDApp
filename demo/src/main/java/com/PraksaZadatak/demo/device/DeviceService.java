@@ -1,5 +1,6 @@
 package com.PraksaZadatak.demo.device;
 
+import com.PraksaZadatak.demo.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
@@ -56,5 +57,22 @@ public class DeviceService {
         Optional<Device> optionalDevice = deviceRepository.findById(id);
         return optionalDevice.orElse(null);
     }
+    public List<Device> getAllDevicesForUser(User user) {
+        return deviceRepository.findByUser(user);
+    }
+
+    public Optional<Device> getDeviceByIdForUser(Long deviceId, User user) {
+        return deviceRepository.findByIdAndUser(deviceId, user);
+    }
+
+    public void saveDevice(Device device, User user) {
+        device.setUser(user);
+        deviceRepository.save(device);
+    }
+
+    public void deleteDeviceByIdForUser(Long deviceId, User user) {
+        deviceRepository.deleteByIdAndUser(deviceId, user);
+    }
+
 
 }

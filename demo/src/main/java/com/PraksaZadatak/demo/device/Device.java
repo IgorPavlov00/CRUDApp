@@ -1,5 +1,6 @@
 package com.PraksaZadatak.demo.device;
 
+import com.PraksaZadatak.demo.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
@@ -110,6 +111,9 @@ public class Device {
     @Min(value = 0, message = "Residual max power must be at least 0")
     @Max(value = 30, message = "Residual max power cannot be more than 30")
     private Double residualMaxPower;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public enum DeviceType {
         PHOTOVOLTAIC_PANEL,

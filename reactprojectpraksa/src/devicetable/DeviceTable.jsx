@@ -105,7 +105,7 @@ const DeviceTable = () => {
     const confirmDelete = (id) => {
         toast.warn(
             <div>
-                <span>Are you sure you want to delete this device?</span>
+                <span style={ { fontWeight: 'bold',color: 'black' }}>Are you sure you want to delete this device?</span>
                 <div className="d-grid gap-4 d-md-flex justify-content-md-end">
                     <CButton color="danger" className="mr-2" onClick={() => handleDelete(id)}>Yes</CButton>
                     <CButton color="secondary" onClick={toast.dismiss}>No</CButton>
@@ -237,7 +237,7 @@ const DeviceTable = () => {
                 sorterValue={{ column: 'status', state: 'asc' }}
             />
 
-            <ToastContainer />
+            <ToastContainer theme= "colored"/>
         </>
     );
 };

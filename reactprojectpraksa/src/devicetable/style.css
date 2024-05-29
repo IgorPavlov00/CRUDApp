@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Khand:wght@300;400;500;600;700&family=Space+Grotesk:wght@300..700&display=swap');
+
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --primry:#0d171f;
+    --second:#0998a8;
+    --bgColor:#192938;
+
+}
+h1,h2,h3,h4,h5,h6,p{
+    color: #fff;
+
+}
+
+body{
+    position: relative;
+    font-family: 'Khand', sans-serif;
+    background-color: var(--bgColor);
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+input[type="text"]{
+
+}
+/* styles.css */
+.custom-modal {
+    background-color: #f8f9fa; /* Change this to your desired background color */
+}
+
+.custom-modal-header {
+    background-color: #007bff; /* Change this to your desired header background color */
+    color: #fff; /* Change this to your desired header text color */
+}
+
+.custom-modal-footer {
+    background-color: #f8f9fa; /* Change this to your desired footer background color */
+}
+.pagination {
+    justify-content: center !important;
+}
+/* CSS for option images */
+#deviceType option[value="Photovoltaic panel"] {
+    background-image: url('https://cdn-icons-png.flaticon.com/128/3392/3392674.png');
+    background-repeat: no-repeat;
+    background-position: 2px center;
+    padding-left: 40px; /* Adjust the padding as needed */
+}
+
+#deviceType option[value="Wind turbine"] {
+    background-image: url('https://cdn-icons-png.flaticon.com/128/5223/5223040.png');
+    background-repeat: no-repeat;
+    background-position: 2px center;
+    padding-left: 40px; /* Adjust the padding as needed */
+}
+
+#deviceType option[value="Battery"] {
+    background-image: url('https://cdn-icons-png.flaticon.com/128/1835/1835726.png');
+    background-repeat: no-repeat;
+    background-position: 2px center;
+    padding-left: 40px; /* Adjust the padding as needed */
+}
+
+#deviceType option[value="Electrical grid"] {
+    background-image: url('https://cdn-icons-png.flaticon.com/128/12350/12350582.png');
+    background-repeat: no-repeat;
+    background-position: 2px center;
+    padding-left: 40px; /* Adjust the padding as needed */
+}
+
+#deviceType option[value="Building"] {
+    background-image: url('https://cdn-icons-png.flaticon.com/128/4200/4200376.png');
+    background-repeat: no-repeat;
+    background-position: 2px center;
+    padding-left: 40px; /* Adjust the padding as needed */
+}
+
+#deviceType option[value="Residual electrical loads"] {
+    background-image: url('https://cdn-icons-png.flaticon.com/128/11652/11652120.png');
+    background-repeat: no-repeat;
+    background-position: 2px center;
+    padding-left: 40px; /* Adjust the padding as needed */
+}
+/* Custom styles for the DeviceModal component */
+

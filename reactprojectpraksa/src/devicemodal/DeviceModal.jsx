@@ -129,15 +129,7 @@ const DeviceModal = ({ addDevice }) => {
 
                 const result = await response.json();
                 console.log('Success:', result);
-                toast.success('Form submitted successfully!', {
-                    position: "top-right",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                });
+                toast.success('Form submitted successfully!');
 
                 setTimeout(() => {
                     window.location.reload(false);
