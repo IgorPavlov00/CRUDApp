@@ -7,12 +7,13 @@ import {
     CNavbarNav,
     CButton,
     CForm,
+    CNavbarBrand
 } from '@coreui/react';
 import { UserContext } from '../context/UserContext';
 import DeviceTable from "../devicetable/DeviceTable";
 import { useNavigate } from 'react-router-dom';
 import './Profile.css'; // Import CSS for custom styles
-
+import { ToastContainer, toast } from 'react-toastify';
 const UserProfile = () => {
     const [visible, setVisible] = useState(false);
     const { user, setUser } = useContext(UserContext); // Added setUser to clear user data from context
@@ -27,10 +28,12 @@ const UserProfile = () => {
     return (
         <>
             <CNavbar expand="lg" colorScheme="blue">
+                {/*<CNavbarBrand style={{ color: 'white',marginLeft: '110px' }}>DER</CNavbarBrand>*/}
                 <CContainer fluid>
                     <CNavbarToggler onClick={() => setVisible(!visible)} />
                     <CCollapse className="navbar-collapse" visible={visible}>
                         <CNavbarNav style={{ width: '86%' }}>
+
                             {/* Add any additional navigation items here */}
                         </CNavbarNav>
                         {user && (
@@ -60,7 +63,9 @@ const UserProfile = () => {
 
             <h1 style={{ textAlign: 'center' }}>Welcome {user?.username}</h1>
             {user ? (
+
                 <div>
+                    <ToastContainer />
                     <DeviceTable />
                 </div>
             ) : (

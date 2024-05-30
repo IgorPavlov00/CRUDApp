@@ -5,9 +5,11 @@ import com.PraksaZadatak.demo.device.Device;
 import com.PraksaZadatak.demo.device.DeviceService;
 import com.PraksaZadatak.demo.user.User;
 import com.PraksaZadatak.demo.user.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +18,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/system")
 @CrossOrigin(origins = "http://localhost:3000")
+@Validated
 public class CombinedControler {
 
     private final DeviceService deviceService;
@@ -42,7 +45,7 @@ public class CombinedControler {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Device> createDevice(@RequestBody Device device, @RequestParam String username) {
+    public ResponseEntity<Device> createDevice(@RequestBody @Valid Device device, @RequestParam String username) {
         User user = userService.findByUsername(username);
         device.setUser(user); // Set the user to avoid circular reference
         deviceService.saveDevice(device, user);
@@ -76,6 +79,7 @@ public class CombinedControler {
             device.setMaximumAvailablePower(updatedDevice.getMaximumAvailablePower());
             device.setCutInWindSpeed(updatedDevice.getCutInWindSpeed());
             device.setCapacity(updatedDevice.getCapacity());
+            device.setBuildingMaxPower(updatedDevice.getBuildingMaxPower());
             device.setMinStateOfCharge(updatedDevice.getMinStateOfCharge());
             device.setMaxStateOfCharge(updatedDevice.getMaxStateOfCharge());
             device.setMotorPower(updatedDevice.getMotorPower());
@@ -104,5 +108,7 @@ public class CombinedControler {
             return ResponseEntity.notFound().build();
         }
     }
+
+
 }
 

@@ -147,7 +147,7 @@ const DeviceTable = () => {
 
     return (
         <>
-            <div className="d-flex justify-content-center align-items-center" style={{ marginTop: '20px', marginBottom: '20px' }}>
+            <div className="d-flex justify-content-center align-items-center" style={{ marginTop: '20px', marginBottom: '60px' }}>
                 <input
                     type="text"
                     placeholder="Filter by name..."
@@ -178,6 +178,7 @@ const DeviceTable = () => {
                     className: 'd-flex justify-content-center',
                     style: {
                         marginTop: '20px',
+
                     }
                 }}
                 scopedColumns={{
@@ -208,10 +209,8 @@ const DeviceTable = () => {
                                 <CButton color="success" onClick={() => openEditModal(item.id)}>Edit</CButton>
                             </div>
                         </td>
-                    ),
-                    show_details: (item) => (
-                        <td className="py-2"></td>
-                    ),
+                    )
+
                 }}
                 tableProps={{
                     color: 'light',

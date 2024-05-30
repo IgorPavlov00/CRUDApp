@@ -43,7 +43,7 @@ public class UserController {
         User user = userService.findByUsername(loginRequest.getUsername());
 
         // Check if the password matches
-        if (user != null && user.getPassword().equals(loginRequest.getPassword())) {
+        if (user != null && user.getPassword().equals(loginRequest.getPassword()) && user.isEnabled()) {
             return ResponseEntity.ok(user);
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

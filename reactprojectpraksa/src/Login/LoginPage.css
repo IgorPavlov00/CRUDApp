@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+@import url('https://fonts.googleapis.com/css2?family=Khand:wght@500&display=swap');
 
 * {
     box-sizing: border-box;
@@ -25,12 +25,12 @@ span {
     color: beige;
 }
 
-a {
-    color: #fff;
-    font-size: 14px;
-    text-decoration: none;
-    margin: 15px 0;
-}
+/*a {*/
+/*    color: #fff;*/
+/*    font-size: 14px;*/
+/*    text-decoration: none;*/
+/*    margin: 15px 0;*/
+/*}*/
 
 .container {
     border-radius: 10px;
@@ -101,15 +101,15 @@ button {
     background: transparent;
     border: none;
     border-bottom: 1px solid #fff;
-    font-family: 'PLay', sans-serif;
+    font-family: 'Khand', sans-serif;
     font-size: 16px;
-    font-weight: 200px;
+    font-weight: bold;
     padding: 10px 0;
     transition: border 0.5s;
     outline: none;
     color: #fff;
-    font-weight: bold;
 }
+
 
 input[type=password] {
     width: 240px;
@@ -117,7 +117,7 @@ input[type=password] {
     background: transparent;
     border: none;
     border-bottom: 1px solid #fff;
-    font-family: 'PLay', sans-serif;
+    font-family: 'Khand', sans-serif;
     font-size: 16px;
     font-weight: bold;
     padding: 10px 0;
@@ -132,14 +132,14 @@ input[type=email] {
     background: transparent;
     border: none;
     border-bottom: 1px solid #fff;
-    font-family: 'PLay', sans-serif;
+    font-family: 'Khand', sans-serif;
     font-size: 16px;
-    font-weight: 200px;
+    font-weight: bold;
+
     padding: 10px 0;
     transition: border 0.5s;
     outline: none;
     color: #fff;
-    font-weight: bold;
 }
 
 button:active {

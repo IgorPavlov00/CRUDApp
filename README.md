@@ -1,6 +1,6 @@
 # Device managment system
 
-During my internship, I developed a  Device Management System designed to streamline the management of various devices. The project integrates a Spring Boot backend with a PostgreSQL database and a React frontend using CoreUI to provide a robust, user-friendly interface for adding, editing, deleting, sorting and filtering devices.
+During my internship, I developed a  Device Management System designed to streamline the management of various devices. The project integrates a Spring Boot backend with a PostgreSQL database and a React frontend using CoreUI to provide a robust, user-friendly interface for adding, editing, deleting, sorting and filtering devices.The system also includes features for user registration, login, and email verification.
 
 ## Technologies Used
 

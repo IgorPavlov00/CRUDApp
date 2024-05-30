@@ -115,7 +115,7 @@ const DeviceModal = ({ addDevice }) => {
                 buildingMaxPower,
                 residualMaxPower
             };
-
+            const loadingToast = toast.loading("Adding device...");
             try {
                 const response = await fetch(`http://localhost:8084/api/system/?username=${user.username}`, {
                     method: 'POST',
@@ -131,7 +131,12 @@ const DeviceModal = ({ addDevice }) => {
 
                 const result = await response.json();
                 console.log('Success:', result);
-                toast.success('Form submitted successfully!');
+                toast.update(loadingToast, {
+                    render: "Device added successfully!",
+                    type: "success",
+                    isLoading: false,
+                    autoClose: 5000,
+                });
 
                 setTimeout(() => {
                     window.location.reload(false);
