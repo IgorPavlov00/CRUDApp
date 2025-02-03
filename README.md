@@ -1,20 +1,59 @@
-# Device managment system
+# 🔧 Device Management System  
 
-During my internship, I developed a  Device Management System designed to streamline the management of various devices. The project integrates a Spring Boot backend with a PostgreSQL database and a React frontend using CoreUI to provide a robust, user-friendly interface for adding, editing, deleting, sorting and filtering devices.The system also includes features for user registration, login, and email verification.
+[![React](https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=black)](https://reactjs.org/)
+[![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=flat&logo=spring&logoColor=white)](https://spring.io/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 
-## Technologies Used
+A full-stack solution for managing organizational devices with user authentication and email verification.
 
-### React
-- **Frontend Framework**: React was used to build the dynamic and responsive user interface.
-- **CoreUI**: CoreUI provided a set of customizable UI components that enhanced the visual appeal and usability of the application. Components like CButton, CCol, CForm, CFormInput, CModal, and others were utilized.
+---
 
-### Spring Boot
-- **Backend Framework**: Spring Boot served as the backbone of the server-side application, providing a robust and scalable structure for developing RESTful APIs.
-- **Hibernate Validator**: Used for validation purposes, ensuring that all device data met specified criteria before being processed and stored in the database.
+## 🌟 Features  
+- **🖥️ Device CRUD Operations**: Add, edit, delete, and filter devices  
+- **🔐 User Authentication**: Secure registration/login with email verification  
+- **📊 Advanced Filtering**: Sort devices by type, status, and department  
+- **📈 Dashboard Analytics**: Visual device statistics and inventory overview  
+- **📧 Email Integration**: Account verification and notification system  
+- **🎨 Responsive UI**: CoreUI-powered interface with modern components  
 
-### PostgreSQL
-- **Database**: PostgreSQL was chosen for its reliability and powerful features, handling the storage, retrieval, and management of device data efficiently.
+---
 
-![image](https://github.com/IgorPavlov00/CRUDApp/assets/103071674/e403897d-bc66-4dd3-a6f0-5ababedbe36a)
+## 🛠️ Tech Stack  
+**Frontend**  
+![React](https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=black)  
+![CoreUI](https://img.shields.io/badge/CoreUI-39B6E5?style=flat&logo=coreui&logoColor=white)  
 
-![image](https://github.com/IgorPavlov00/CRUDApp/assets/103071674/f5738cff-fbf3-4fd5-b33d-3ef3a8746daa)
+**Backend**  
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=flat&logo=spring&logoColor=white)  
+![Hibernate](https://img.shields.io/badge/Hibernate-59666C?style=flat&logo=hibernate&logoColor=white)  
+
+**Database**  
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat&logo=postgresql&logoColor=white)  
+
+**Services**  
+![JavaMail](https://img.shields.io/badge/JavaMail-0078D4?style=flat&logo=microsoft-outlook&logoColor=white)  
+
+---
+
+## 📸 Screenshots  
+| Device Dashboard | Management Interface |  
+|------------------|----------------------|  
+| ![Dashboard](https://github.com/IgorPavlov00/CRUDApp/assets/103071674/e403897d-bc66-4dd3-a6f0-5ababedbe36a) | ![Management](https://github.com/IgorPavlov00/CRUDApp/assets/103071674/f5738cff-fbf3-4fd5-b33d-3ef3a8746daa) |  
+
+---
+
+## 🏁 Getting Started  
+
+### Prerequisites  
+- Node.js 16+  
+- Java 17+  
+- PostgreSQL 14+  
+- Maven  
+
+### Installation  
+**Frontend Setup**  
+```bash
+git clone https://github.com/IgorPavlov00/CRUDApp.git
+cd frontend
+npm install
+npm start
